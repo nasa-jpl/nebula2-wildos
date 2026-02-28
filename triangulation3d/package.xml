@@ -4,7 +4,7 @@
   <name>triangulation3d</name>
   <version>0.0.0</version>
   <description>Particle filter based 3D triangulation</description>
-  <maintainer email="hardikns@jpl.nasa.gov">scarecrow</maintainer>
+  <maintainer email="hardikns@jpl.nasa.gov">Hardik Shah</maintainer>
   <license>Apache-2.0</license>
 
   <test_depend>ament_copyright</test_depend>
