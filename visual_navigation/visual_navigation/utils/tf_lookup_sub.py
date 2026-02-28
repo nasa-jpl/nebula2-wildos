@@ -18,7 +18,7 @@ from omegaconf import OmegaConf
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 
-from img_vlms.utils.buffer import MessageBuffer
+from visual_navigation.utils.buffer import MessageBuffer
 
 @dataclass
 class TFEdge:

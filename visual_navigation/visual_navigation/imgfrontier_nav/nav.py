@@ -14,13 +14,13 @@ from scipy.spatial.transform import Rotation as R
 import torch
 from torchvision import transforms
 
-from img_vlms.utils.tf_lookup_sub import TFEdge
-from img_vlms.utils.goal_navigator import GoalNavigator
-from img_vlms.utils.scoring import ScoringGeometricFrontiers
-from img_vlms.geofrontier_nav.viz import VisualizeGeoFrontierScoring
-from img_vlms.utils.object_search_utils import localize_query, get_objectmask_msg
-from img_vlms.imgfrontier_nav.viz import get_path_msg
-from img_vlms.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from visual_navigation.utils.tf_lookup_sub import TFEdge
+from visual_navigation.utils.goal_navigator import GoalNavigator
+from visual_navigation.utils.scoring import ScoringGeometricFrontiers
+from visual_navigation.geofrontier_nav.viz import VisualizeGeoFrontierScoring
+from visual_navigation.utils.object_search_utils import localize_query, get_objectmask_msg
+from visual_navigation.imgfrontier_nav.viz import get_path_msg
+from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
 
 HOME_DIR = Path.home()
 CAMERA_MAPPING = {
@@ -509,7 +509,7 @@ def main(args=None):
     if conf_name.endswith(".yaml") is False:
         conf_name += ".yaml"
 
-    package_share_directory = Path(get_package_share_directory('img_vlms'))
+    package_share_directory = Path(get_package_share_directory('visual_navigation'))
     conf = package_share_directory / "configs" / conf_name
 
     imgfrontiernav_node = ImgFrontierNav(OmegaConf.load(conf), do_object_search=custom_args.do_object_search)

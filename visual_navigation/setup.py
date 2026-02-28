@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 import os
 from glob import glob
 
-package_name = 'img_vlms'
+package_name = 'visual_navigation'
 
 setup(
     name=package_name,
@@ -39,25 +39,25 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'img_sub = img_vlms.vlm_viz.img_sub:main',
-            'img_sam = img_vlms.vlm_viz.img_sam:main',
-            'img_dinov2_pca = img_vlms.vlm_viz.img_dinofeat:main',
-            'img_ram_gdino = img_vlms.vlm_viz.img_ram_gdino:main',
-            'img_ramp_gdino = img_vlms.vlm_viz.img_ramp_gdino:main',
-            'img_radio = img_vlms.vlm_viz.img_radio:main',
-            'radio_triangulate = img_vlms.radio_triangulation.demo_radio_triangulator:main',
-            'debug_tf = img_vlms.radio_triangulation.debug_tf:main',
-            'lrn = img_vlms.lrn.nav:main',
-            'gps_viz = img_vlms.gps.gps_viz:main',
-            'gps_save = img_vlms.gps.save_gps_path:main',
-            'metrics_save = img_vlms.gps.save_metrics:main',
-            'img_frontier_nav = img_vlms.imgfrontier_nav.nav:main',
-            'geo_frontier_nav = img_vlms.geofrontier_nav.nav:main',
-            'goalagnostic_scoring = img_vlms.goalagnostic_geofrontier_nav.nav:main',
-            'obj_mask_triangulation = img_vlms.radio_triangulation.obj_mask_triangulation:main',
-            'viz_net = img_vlms.imgfrontier_nav.viz_net:main',
-            'pcl_colorizer = img_vlms.imgfrontier_nav.pcl_color:main',
-            'map_colorizer = img_vlms.imgfrontier_nav.map_color:main',
+            'img_sub = visual_navigation.vlm_viz.img_sub:main',
+            'img_sam = visual_navigation.vlm_viz.img_sam:main',
+            'img_dinov2_pca = visual_navigation.vlm_viz.img_dinofeat:main',
+            'img_ram_gdino = visual_navigation.vlm_viz.img_ram_gdino:main',
+            'img_ramp_gdino = visual_navigation.vlm_viz.img_ramp_gdino:main',
+            'img_radio = visual_navigation.vlm_viz.img_radio:main',
+            'radio_triangulate = visual_navigation.radio_triangulation.demo_radio_triangulator:main',
+            'debug_tf = visual_navigation.radio_triangulation.debug_tf:main',
+            'lrn = visual_navigation.lrn.nav:main',
+            'gps_viz = visual_navigation.gps.gps_viz:main',
+            'gps_save = visual_navigation.gps.save_gps_path:main',
+            'metrics_save = visual_navigation.gps.save_metrics:main',
+            'img_frontier_nav = visual_navigation.imgfrontier_nav.nav:main',
+            'geo_frontier_nav = visual_navigation.geofrontier_nav.nav:main',
+            'goalagnostic_scoring = visual_navigation.goalagnostic_geofrontier_nav.nav:main',
+            'obj_mask_triangulation = visual_navigation.radio_triangulation.obj_mask_triangulation:main',
+            'viz_net = visual_navigation.imgfrontier_nav.viz_net:main',
+            'pcl_colorizer = visual_navigation.imgfrontier_nav.pcl_color:main',
+            'map_colorizer = visual_navigation.imgfrontier_nav.map_color:main',
         ],
     },
 )

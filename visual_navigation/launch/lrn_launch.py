@@ -34,7 +34,7 @@ def generate_launch_description():
 
         # Always launch lrn
         Node(
-            package='img_vlms',
+            package='visual_navigation',
             executable='lrn',
             output='screen',
             arguments=[
@@ -53,7 +53,7 @@ def generate_launch_description():
 
         # Conditionally launch obj_mask_triangulation
         Node(
-            package='img_vlms',
+            package='visual_navigation',
             executable='obj_mask_triangulation',
             output='screen',
             arguments=[

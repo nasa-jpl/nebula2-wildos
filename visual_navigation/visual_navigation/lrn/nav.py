@@ -15,12 +15,12 @@ from scipy.spatial.transform import Rotation as R
 import torch
 from torchvision import transforms
 
-from img_vlms.utils.tf_lookup_sub import TFEdge
-from img_vlms.utils.goal_navigator import GoalNavigator
-from img_vlms.lrn.scoring import LRNScoring
-from img_vlms.lrn.viz import LRNVisualizer
-from img_vlms.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
-from img_vlms.utils.object_search_utils import localize_query, get_objectmask_msg
+from visual_navigation.utils.tf_lookup_sub import TFEdge
+from visual_navigation.utils.goal_navigator import GoalNavigator
+from visual_navigation.lrn.scoring import LRNScoring
+from visual_navigation.lrn.viz import LRNVisualizer
+from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from visual_navigation.utils.object_search_utils import localize_query, get_objectmask_msg
 
 HOME_DIR = Path.home()
 CAMERA_MAPPING = {
@@ -475,7 +475,7 @@ def main(args=None):
     if conf_name.endswith(".yaml") is False:
         conf_name += ".yaml"
 
-    package_share_directory = Path(get_package_share_directory('img_vlms'))
+    package_share_directory = Path(get_package_share_directory('visual_navigation'))
     conf = package_share_directory / "configs" / conf_name
 
     lrn_node = LRN(OmegaConf.load(conf), do_object_search=custom_args.do_object_search)

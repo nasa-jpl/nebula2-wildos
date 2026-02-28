@@ -22,8 +22,8 @@ import matplotlib as mpl
 import matplotlib
 from matplotlib.gridspec import GridSpec
 
-from img_vlms.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
-from img_vlms.utils.viz import (
+from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from visual_navigation.utils.viz import (
     make_subplot_grid, overlay_heatmap, draw_point, draw_text, draw_path, make_colorbar, pad_image
 )
 HOME_DIR = Path.home()

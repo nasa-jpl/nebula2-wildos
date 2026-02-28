@@ -22,7 +22,7 @@ def generate_launch_description():
         ),
 
         Node(
-            package='img_vlms',
+            package='visual_navigation',
             executable='gps_save',
             output='screen',
             parameters=[
@@ -41,7 +41,7 @@ def generate_launch_description():
         ),
 
         Node(
-            package='img_vlms',
+            package='visual_navigation',
             executable='metrics_save',
             output='screen',
             parameters=[

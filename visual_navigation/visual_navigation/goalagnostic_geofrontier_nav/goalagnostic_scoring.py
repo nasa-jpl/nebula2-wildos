@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from skimage.graph import MCP_Geometric
 
-from img_vlms.utils.scoring import ScoringGeometricFrontiers, ScoringMethod
+from visual_navigation.utils.scoring import ScoringGeometricFrontiers, ScoringMethod
 
 class GoalAgnosticScoring(ScoringGeometricFrontiers):
     """

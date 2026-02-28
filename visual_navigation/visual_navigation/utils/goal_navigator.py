@@ -6,7 +6,7 @@ from visualization_msgs.msg import Marker, MarkerArray
 from geometry_msgs.msg import PoseStamped, Point
 from nav_msgs.msg import Odometry
 
-from img_vlms.utils.tf_lookup_sub import TFLookupSubscriber
+from visual_navigation.utils.tf_lookup_sub import TFLookupSubscriber
 
 # TODO: waypoints are assumed in the global frame, change this if needed
 

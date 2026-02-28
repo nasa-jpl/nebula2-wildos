@@ -11,7 +11,7 @@ from geometry_msgs.msg import Point, Pose
 from builtin_interfaces.msg import Duration as MarkerDuration
 from std_msgs.msg import ColorRGBA
 
-from img_vlms.utils.viz import (
+from visual_navigation.utils.viz import (
     make_subplot_grid, overlay_heatmap, make_histogram, make_colorbar, pad_image
 )
 

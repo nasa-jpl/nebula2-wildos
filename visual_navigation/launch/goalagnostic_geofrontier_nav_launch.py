@@ -35,7 +35,7 @@ def generate_launch_description():
 
         # Always launch goalagnostic_scoring
         Node(
-            package='img_vlms',
+            package='visual_navigation',
             executable='goalagnostic_scoring',
             output='screen',
             arguments=[
@@ -54,7 +54,7 @@ def generate_launch_description():
 
         # Conditionally launch obj_mask_triangulation
         Node(
-            package='img_vlms',
+            package='visual_navigation',
             executable='obj_mask_triangulation',
             output='screen',
             arguments=[

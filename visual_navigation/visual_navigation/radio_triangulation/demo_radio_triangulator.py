@@ -21,8 +21,8 @@ from triangulation3d.particle_generator import ParticleGenerator
 from triangulation3d.bbox_generator import BoundingBoxGenerator
 from triangulation3d.triangulator import Triangulator
 from image_geometry import PinholeCameraModel
-from img_vlms.third_party.nvidia_radio.hubconf import radio_model
-from img_vlms.third_party.nvidia_radio.radio.pamr import PAMR
+from visual_navigation.third_party.nvidia_radio.hubconf import radio_model
+from visual_navigation.third_party.nvidia_radio.radio.pamr import PAMR
 
 import cv2
 from cv_bridge import CvBridge

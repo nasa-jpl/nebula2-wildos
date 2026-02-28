@@ -4,8 +4,8 @@ from rclpy.duration import Duration
 
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
-from img_vlms.utils.buffer import MessageBuffer
-from img_vlms.utils.tf_lookup_sub import TFLookupSubscriber
+from visual_navigation.utils.buffer import MessageBuffer
+from visual_navigation.utils.tf_lookup_sub import TFLookupSubscriber
 
 from sensor_msgs_py import point_cloud2
 from object_search_msgs.msg import ObjectMaskWithTf
@@ -423,7 +423,7 @@ def main(args=None):
     from ament_index_python.packages import get_package_share_directory
     import os
 
-    package_share_directory = Path(get_package_share_directory('img_vlms'))
+    package_share_directory = Path(get_package_share_directory('visual_navigation'))
     conf = package_share_directory / "configs" / "triangulation3d_objsearch_conf.yaml"
 
     mask_triang_node = ObjectMaskTriangulator(OmegaConf.load(conf))

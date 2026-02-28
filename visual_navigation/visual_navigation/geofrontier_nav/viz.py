@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-from img_vlms.utils.viz import (
+from visual_navigation.utils.viz import (
     make_subplot_grid, overlay_heatmap, draw_point, draw_text, draw_path, make_colorbar, pad_image
 )
 

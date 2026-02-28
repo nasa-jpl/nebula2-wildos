@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>img_vlms</name>
+  <name>visual_navigation</name>
   <version>0.0.0</version>
   <description>Run VLMs on the robot camera feed.</description>
   <maintainer email="hardikns@jpl.nasa.gov">Hardik Shah</maintainer>
