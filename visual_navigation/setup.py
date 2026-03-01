@@ -58,6 +58,7 @@ setup(
             'viz_net = visual_navigation.imgfrontier_nav.viz_net:main',
             'pcl_colorizer = visual_navigation.imgfrontier_nav.pcl_color:main',
             'map_colorizer = visual_navigation.imgfrontier_nav.map_color:main',
+            'radio_triangulate = visual_navigation.radio_triangulation.radio_triangulator:main',
         ],
     },
 )
