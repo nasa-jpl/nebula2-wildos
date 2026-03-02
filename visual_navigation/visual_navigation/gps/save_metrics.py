@@ -19,15 +19,6 @@ class RunMetricsNode(Node):
         super().__init__('run_metrics_node')
         self.declare_parameter('save_path', 'metrics_path.json')
 
-        # self.odom_sub = Subscriber(self, Odometry, "/spot1/odom", qos_profile=10)
-        # # self.model_viz_sub = Subscriber(self, ImageMsg, "/spot1/model_visualization", qos_profile=10)
-        # # self.model_viz_sub = Subscriber(self, PathMsg, "/spot1/graphnav_planner/path", qos_profile=10)
-        # self.model_viz_sub = Subscriber(self, PoseStamped, "/spot1/goal_pose", qos_profile=10)
-        # ts_subs = [self.odom_sub, self.model_viz_sub]
-        # self.ts = ApproximateTimeSynchronizer(
-        #     ts_subs, queue_size=10, slop=0.1
-        # )
-        # self.ts.registerCallback(self.listener_callback)
         self.odom_sub = self.create_subscription(
             Odometry,
             '/spot1/odom',

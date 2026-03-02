@@ -10,9 +10,9 @@ from gps_visualization.msg import NavSatFixArray
 import os
 import json
 
-class GPSVizNode(Node):
+class SaveGPSPathNode(Node):
     def __init__(self):
-        super().__init__('gps_viz_node')
+        super().__init__('save_gps_path_node')
         self.declare_parameter('save_path', 'gps_path.json')
         self.gps_coords = []
         self.subscription = self.create_subscription(
@@ -40,11 +40,11 @@ class GPSVizNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    gps_viz_node = GPSVizNode()
-    rclpy.spin(gps_viz_node)
+    save_gps_path_node = SaveGPSPathNode()
+    rclpy.spin(save_gps_path_node)
 
     # Destroy the node explicitly
-    gps_viz_node.destroy_node()
+    save_gps_path_node.destroy_node()
     rclpy.shutdown() 
 
 if __name__ == '__main__':
