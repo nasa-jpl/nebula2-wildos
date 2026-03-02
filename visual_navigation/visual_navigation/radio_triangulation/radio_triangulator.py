@@ -22,7 +22,7 @@ from torchvision import transforms
 
 from visual_navigation.utils.tf_lookup_sub import TFEdge, TFLookupSubscriber
 from visual_navigation.utils.object_search_utils import localize_query
-from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from explorfm import ExploRFMInference
 from visual_navigation.radio_triangulation.triangulator_viz import TriangulationViz
 
 from triangulation3d.camera_data import Camera
@@ -204,7 +204,7 @@ class RadioTriangulator(TFLookupSubscriber):
         self.device = "cuda"
 
         # radio model
-        self.model = RADIODownstreamInference(
+        self.model = ExploRFMInference(
             frontier_ckpt=None,
             traversability_ckpt= None,
             model_version=self.model_path,

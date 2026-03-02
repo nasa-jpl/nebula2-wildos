@@ -1,4 +1,3 @@
-from pyexpat import model
 from typing import Optional, Tuple, List
 import os
 from enum import Enum, auto
@@ -9,7 +8,7 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 
-from .hubconf import radio_model
+from nvidia_radio.hubconf import radio_model
 
 class ModelPrecision(Enum):
     FP32 = auto()
@@ -24,7 +23,7 @@ class ModelPrecision(Enum):
     def is_fp32(self) -> bool:
         return self == ModelPrecision.FP32
 
-class RADIODownstream(nn.Module):
+class ExploRFM(nn.Module):
     def __init__(
         self,
         frontier_ckpt: Optional[str]=None,
@@ -174,9 +173,9 @@ class RADIODownstream(nn.Module):
         return traversability, frontiers, ad_spatial_features
     
 
-class RADIODownstreamInference:
+class ExploRFMInference:
     """
-    Perform inference using the RADIODownstream model with different precision.
+    Perform inference using the ExploRFM model with different precision.
     Also supports exporting the model to ONNX format.
     """
     def __init__(
@@ -193,7 +192,7 @@ class RADIODownstreamInference:
         model_precision: str = "FP32",
         device: Optional[str] = None,
     ):
-        self.model = RADIODownstream(
+        self.model = ExploRFM(
             frontier_ckpt=frontier_ckpt,
             traversability_ckpt=traversability_ckpt,
             model_version=model_version,
@@ -307,7 +306,7 @@ if __name__ == "__main__":
     frontier_ckpt = "ckpts/frontier_head.ckpt"
     traversability_ckpt = "ckpts/trav_head.ckpt"
 
-    model = RADIODownstreamInference(
+    model = ExploRFMInference(
         frontier_ckpt=frontier_ckpt,
         traversability_ckpt=traversability_ckpt,
         model_version="c-radio_v3-b",
@@ -326,6 +325,6 @@ if __name__ == "__main__":
     if text_feats is not None:
         print("Adaptor features shape:", text_feats.shape)
     
-    model.export_to_onnx(output_path_prefix="ckpts/radio_onnx_test", input_shape=(3, 720, 1280), opset_version=17)
+    model.export_to_onnx(output_path_prefix="ckpts/explorfm_onnx_test", input_shape=(3, 720, 1280), opset_version=17)
     
     print("Inference completed successfully.")

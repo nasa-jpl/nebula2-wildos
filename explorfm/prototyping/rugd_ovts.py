@@ -1,24 +1,22 @@
 """
 Use:  export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-when running on large images (debug_img_nebula.png)
+when running on large images
 """
-
-from PIL import Image
-from radio.pamr import PAMR
-import torch
-from torch.nn import functional as F
-from torchvision.transforms.functional import pil_to_tensor
-from timm.models import VisionTransformer
-from hubconf import radio_model
 
 import os
 import cv2
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
 import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import numpy as np
+
+from PIL import Image
+import torch
+from torch.nn import functional as F
+from torchvision.transforms.functional import pil_to_tensor
+
+
+from nvidia_radio.radio.pamr import PAMR
+from nvidia_radio.hubconf import radio_model
 
 class RADIO_Segmentation:
     """

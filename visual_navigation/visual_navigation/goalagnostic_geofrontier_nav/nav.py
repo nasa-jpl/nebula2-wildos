@@ -19,7 +19,7 @@ from visual_navigation.utils.tf_lookup_sub import TFEdge, TFLookupSubscriber
 from visual_navigation.goalagnostic_geofrontier_nav.goalagnostic_scoring import GoalAgnosticScoring
 from visual_navigation.geofrontier_nav.geofrontier_to_image import GeoFrontierToImage
 from visual_navigation.goalagnostic_geofrontier_nav.viz import VisualizeGoalAgnosticGeoFrontierScoring
-from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from explorfm import ExploRFMInference
 from visual_navigation.utils.object_search_utils import localize_query, get_objectmask_msg
 
 HOME_DIR = Path.home()
@@ -221,7 +221,7 @@ class GoalAgnosticGeoFrontierNav(TFLookupSubscriber):
             config.adaptor_version = "siglip2"
 
         # radio model
-        self.model = RADIODownstreamInference(
+        self.model = ExploRFMInference(
             frontier_ckpt=HOME_DIR / "ckpts" / config.frontier_ckpt,
             traversability_ckpt=HOME_DIR / "ckpts" / config.traversability_ckpt,
             model_version=config.model_version,

@@ -20,7 +20,7 @@ from visual_navigation.utils.scoring import ScoringGeometricFrontiers
 from visual_navigation.geofrontier_nav.viz import VisualizeGeoFrontierScoring
 from visual_navigation.utils.object_search_utils import localize_query, get_objectmask_msg
 from visual_navigation.imgfrontier_nav.viz import get_path_msg
-from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from explorfm import ExploRFMInference
 
 HOME_DIR = Path.home()
 CAMERA_MAPPING = {
@@ -195,7 +195,7 @@ class ImgFrontierNav(GoalNavigator):
             config.adaptor_version = "siglip2"
 
         # radio model
-        self.model = RADIODownstreamInference(
+        self.model = ExploRFMInference(
             frontier_ckpt= HOME_DIR / "ckpts" / config.frontier_ckpt,
             traversability_ckpt= HOME_DIR / "ckpts" / config.traversability_ckpt,
             model_version=config.model_version,

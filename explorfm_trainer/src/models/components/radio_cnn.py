@@ -5,8 +5,8 @@ from torch import nn
 from torch.nn import functional as F
 
 from src.models.components.radio_utils import RADIO_MODEL_VERSIONS, RADIO_ADAPTOR_VERSIONS
-from src.models.third_party.nvidia_radio.radio.pamr import PAMR
-from src.models.third_party.nvidia_radio.hubconf import radio_model
+from nvidia_radio.radio.pamr import PAMR
+from nvidia_radio.hubconf import radio_model
 
 class RADIO_CNN(nn.Module):
     """A CNN decoder head on top of a RADIO model."""

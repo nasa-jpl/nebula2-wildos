@@ -19,7 +19,7 @@ from visual_navigation.utils.tf_lookup_sub import TFEdge
 from visual_navigation.utils.goal_navigator import GoalNavigator
 from visual_navigation.lrn.scoring import LRNScoring
 from visual_navigation.lrn.viz import LRNVisualizer
-from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from explorfm import ExploRFMInference
 from visual_navigation.utils.object_search_utils import localize_query, get_objectmask_msg
 
 HOME_DIR = Path.home()
@@ -205,7 +205,7 @@ class LRN(GoalNavigator):
             config.adaptor_version = "siglip2"
 
         # radio model
-        self.model = RADIODownstreamInference(
+        self.model = ExploRFMInference(
             frontier_ckpt= HOME_DIR / "ckpts" / config.frontier_ckpt,
             traversability_ckpt= HOME_DIR / "ckpts" / config.traversability_ckpt,
             model_version=config.model_version,

@@ -1,11 +1,7 @@
-from typing import Any, Dict, Optional, Tuple, List
-import os
+from typing import Optional
 from tqdm import tqdm
 import cv2
-from PIL import Image
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from torchvision.transforms.functional import pil_to_tensor
 from torchvision.transforms import transforms
 
 import numpy as np
@@ -14,13 +10,12 @@ from torch import nn
 from torch.nn import functional as F
 import onnxruntime as ort
 
-from hubconf import radio_model
-from datasets.rugd import RUGDTraversabilityDataset
-from datasets.nebula import NebulaDataset
-from radio_downstream import ModelPrecision
+from protoyping.datasets.rugd import RUGDTraversabilityDataset
+from protoyping.datasets.nebula import NebulaDataset
+from explorfm_model import ModelPrecision
 
 
-class RADIODownstreamONNXInference:
+class ExploRFMONNXInference:
     def __init__(self,
         onnx_ckpt: str,
         model_precision: str = "FP32",
@@ -131,7 +126,7 @@ class RADIODownstreamONNXInference:
         return self.model_forward(x)
 
 
-def process_index(onnx_model: RADIODownstreamONNXInference, index: int, dataset):
+def process_index(onnx_model: ExploRFMONNXInference, index: int, dataset):
     image, annotation = dataset.get_image_and_annotation(index)
     _ = dataset.get_traversability(annotation)  # if you still need it downstream
     traversability, frontiers, _ = onnx_model.model_forward_on_numpy(image)
@@ -182,7 +177,7 @@ def visualize_results(img_name: str, index: int, image: np.ndarray, traversabili
     return True
 
 
-def run(onnx_model: RADIODownstreamONNXInference, dataset):
+def run(onnx_model: ExploRFMONNXInference, dataset):
     """Run the model on the dataset and visualize results."""
     for index in tqdm(range(len(dataset))):
         if not process_index(onnx_model, index, dataset):
@@ -190,12 +185,12 @@ def run(onnx_model: RADIODownstreamONNXInference, dataset):
             break
 
 if __name__ == "__main__":
-    onnx_ckpt = "ckpts/radio_onnx_test_B_3_720_1280_FP16.onnx"
+    onnx_ckpt = "ckpts/explorfm_onnx_test_B_3_720_1280_FP16.onnx"
 
-    # rugd_dataset = RUGDTraversabilityDataset("/home/nebula2/data/RUGD")
-    nebula_dataset = NebulaDataset("/home/nebula2/data/nebula")
+    # rugd_dataset = RUGDTraversabilityDataset("/home/$USER/data/RUGD")
+    nebula_dataset = NebulaDataset("/home/$USER/data/nebula")
 
-    model = RADIODownstreamONNXInference(
+    model = ExploRFMONNXInference(
         onnx_ckpt=onnx_ckpt,
         model_precision="FP16",
         device='cuda'

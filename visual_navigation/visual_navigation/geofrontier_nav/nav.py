@@ -18,7 +18,7 @@ from visual_navigation.utils.goal_navigator import GoalNavigator
 from visual_navigation.utils.scoring import ScoringGeometricFrontiers
 from visual_navigation.geofrontier_nav.geofrontier_to_image import GeoFrontierToImage
 from visual_navigation.geofrontier_nav.viz import VisualizeGeoFrontierScoring
-from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from explorfm import ExploRFMInference
 
 HOME_DIR = Path.home()
 CAMERA_MAPPING = {
@@ -189,7 +189,7 @@ class GeoFrontierNav(GoalNavigator):
         self.device = "cuda"
 
         # radio model
-        self.model = RADIODownstreamInference(
+        self.model = ExploRFMInference(
             frontier_ckpt= HOME_DIR / "ckpts" / config.frontier_ckpt,
             traversability_ckpt= HOME_DIR / "ckpts" / config.traversability_ckpt,
             model_version=config.model_version,

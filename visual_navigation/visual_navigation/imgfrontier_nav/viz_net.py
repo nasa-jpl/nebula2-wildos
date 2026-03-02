@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.gridspec import GridSpec
 
-from visual_navigation.third_party.nvidia_radio.radio_downstream import RADIODownstreamInference
+from explorfm import ExploRFMInference
 from visual_navigation.utils.viz import overlay_heatmap
 
 HOME_DIR = Path.home()
@@ -109,7 +109,7 @@ class VizModelPred(Node):
         self.device = "cuda"
 
         # radio model
-        self.model = RADIODownstreamInference(
+        self.model = ExploRFMInference(
             frontier_ckpt= HOME_DIR / "ckpts" / config.frontier_ckpt,
             traversability_ckpt= HOME_DIR / "ckpts" / config.traversability_ckpt,
             model_version=config.model_version,

@@ -1,27 +1,18 @@
-from typing import Any, Dict, Optional, Tuple, List
-import os
 from tqdm import tqdm
 import cv2
-from PIL import Image
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from torchvision.transforms.functional import pil_to_tensor
-from torchvision.transforms import transforms
 
 import numpy as np
 import torch
-from torch import nn
-from torch.nn import functional as F
 
-from hubconf import radio_model
 from datasets.rugd import RUGDTraversabilityDataset
 from datasets.nebula import NebulaDataset
-from radio_downstream import RADIODownstreamInference
+from ..explorfm_model import ExploRFMInference
 
-class RADIOFrontierTraversability:
+class ExploRFMFrontierTraversability:
     def __init__(self,
         dataset: RUGDTraversabilityDataset,
-        model: RADIODownstreamInference
+        model: ExploRFMInference
     ):
         self.dataset = dataset
         self.model = model
@@ -97,7 +88,7 @@ if __name__ == "__main__":
 
     rugd_dataset = RUGDTraversabilityDataset("/home/$USER/data/RUGD")
     nebula_dataset = NebulaDataset("/home/$USER/data/nebula")
-    radio_dn_model = RADIODownstreamInference(
+    radio_dn_model = ExploRFMInference(
         frontier_ckpt=frontier_ckpt,
         traversability_ckpt=traversability_ckpt,
         model_version="c-radio_v3-b",
@@ -109,7 +100,7 @@ if __name__ == "__main__":
         model_precision="FP16",
     )
 
-    model = RADIOFrontierTraversability(
+    model = ExploRFMFrontierTraversability(
         # dataset=rugd_dataset,
         dataset=nebula_dataset,
         model=radio_dn_model

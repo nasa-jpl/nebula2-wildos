@@ -4,17 +4,18 @@ when running on large images (debug_img_nebula.png)
 """
 
 from PIL import Image
-from radio.pamr import PAMR
-import torch
-from torch.nn import functional as F
-from torchvision.transforms.functional import pil_to_tensor
-from timm.models import VisionTransformer
-from hubconf import radio_model
-
 import cv2
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
+
+import torch
+from torch.nn import functional as F
+from torchvision.transforms.functional import pil_to_tensor
+
+from nvidia_radio.hubconf import radio_model
+from nvidia_radio.radio.pamr import PAMR
+
 
 #model_version="radio_v2.5-g" # for RADIOv2.5-g model (ViT-H/14)
 # model_version="radio_v2.5-h" # for RADIOv2.5-H model (ViT-H/16)

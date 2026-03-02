@@ -4,26 +4,17 @@ from tqdm import tqdm
 import cv2
 import networkx as nx
 from skimage.graph import MCP_Geometric
-from PIL import Image
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from torchvision.transforms.functional import pil_to_tensor
-from torchvision.transforms import transforms
-
 import numpy as np
-import torch
-from torch import nn
-from torch.nn import functional as F
 
-from hubconf import radio_model
 from datasets.rugd import RUGDTraversabilityDataset
 from datasets.nebula import NebulaDataset
-from radio_downstream import RADIODownstreamInference
+from ..explorfm_model import ExploRFMInference
 
-class RADIOFrontierTraversability:
+class ExploRFMScoringTest:
     def __init__(self,
         dataset: RUGDTraversabilityDataset,
-        model: RADIODownstreamInference,
+        model: ExploRFMInference,
         num_frontiers: int = 10,
         num_radial_bins: int = 8,
         top_k_frontiers: int = 5,
@@ -619,7 +610,7 @@ if __name__ == "__main__":
 
     rugd_dataset = RUGDTraversabilityDataset("/home/$USER/data/RUGD")
     nebula_dataset = NebulaDataset("/home/$USER/data/nebula")
-    radio_dn_model = RADIODownstreamInference(
+    radio_dn_model = ExploRFMInference(
         frontier_ckpt=frontier_ckpt,
         traversability_ckpt=traversability_ckpt,
         model_version="c-radio_v3-b",
@@ -631,7 +622,7 @@ if __name__ == "__main__":
         model_precision="FP16",
     )
 
-    model = RADIOFrontierTraversability(
+    model = ExploRFMScoringTest(
         dataset=nebula_dataset,
         # dataset=rugd_dataset,
         model=radio_dn_model,

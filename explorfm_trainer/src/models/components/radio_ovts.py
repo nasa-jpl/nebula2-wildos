@@ -9,8 +9,8 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision.transforms.functional import pil_to_tensor
 
-from src.models.third_party.nvidia_radio.radio.pamr import PAMR
-from src.models.third_party.nvidia_radio.hubconf import radio_model
+from nvidia_radio.radio.pamr import PAMR
+from nvidia_radio.hubconf import radio_model
 from src.models.components.radio_utils import RADIO_MODEL_VERSIONS, RADIO_ADAPTOR_VERSIONS
 
 class RADIO_Segmentation(nn.Module):
