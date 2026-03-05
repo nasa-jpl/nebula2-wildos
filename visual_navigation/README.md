@@ -1,86 +1,52 @@
-# VLMs on Spot
-This package is a testbed for different VLMs on the camera feed from a Spot robot.
+# Visual Navigation
 
-## Supported Models
-- [Grounded-SAM](https://github.com/IDEA-Research/Grounded-Segment-Anything)
-    Query the image using a text prompt to get the segmentation masks. RAM is used for grounding the text prompt to the image 
-    and get "text tags" for the image - objects appeared in the image. The text tags are used as prompts for Grounded-SAM to get the segmentation masks.
-    - [Recognize-Anything (RAM)](https://github.com/OPPOMKLab/recognize-anything)
-    - [Grounding-DINO](https://github.com/IDEA-Research/GroundingDINO)
-- [Grounded-SAM-2](https://github.com/IDEA-Research/Grounded-SAM-2)
+ROS 2 navigation package for WildOS and baseline implementations. This package contains the main navigation pipelines, scoring logic, and utility nodes.
 
+## Modules
 
-## Installation
-In your ros2 workspace, clone this repository:
-```bash
-git clone git@hydra.robotics.caltech.edu:nebula2/sandbox/planning/img_vlms.git
-```
+| Module | Description |
+|---|---|
+| `wildos/` | **WildOS** — Full navigation pipeline with ExploRFM inference, graph scoring, and object search |
+| `explorfm_triangulation/` | Particle-filter-based object triangulation nodes |
+| `imgfrontier_nav/` | Image frontier navigation baseline (vision-only, no geometry) |
+| `lrn/` | [LRN](https://arxiv.org/abs/2504.13149) baseline (vision-only, no geometry) |
+| `geofrontier_nav/` | Geometric frontier navigation with fixed goal scoring |
+| `gps/` | GPS visualization and metric logging nodes |
+| `utils/` | Shared scoring and utility functions |
 
-To install the dependencies in the `nebula` docker, switch to the `img_vlms` branch of [core_docker](https://hydra.robotics.caltech.edu/nebula2/integration/core/core_docker/-/tree/img_vlms?ref_type=heads) and build the docker image:
-```bash
-run_docker_nebula2.py --image_tag nebula2-developer:amd64
-```
+## Key Files
 
-To install third-party repositories, run the following command in the `img_vlms` directory:
-```bash
-git submodule init --recursive
-git submodule update
+| File | Description |
+|---|---|
+| `wildos/nav.py` | WildOS main node — runs ExploRFM inference and publishes scored navigation graph |
+| `wildos/goalagnostic_scoring.py` | Goal-agnostic frontier scoring combining traversability and frontier predictions |
+| `utils/scoring.py` | Graph scoring utilities shared across navigation methods |
+| `explorfm_triangulation/obj_mask_triangulation.py` | Object mask triangulation (used during WildOS deployment) |
+| `explorfm_triangulation/explorfm_triangulator.py` | Standalone ExploRFM triangulation node (for testing) |
+| `imgfrontier_nav/viz_net.py` | ExploRFM output visualization (debugging tool) |
 
-cd img_vlms/third_party
+> See the [main README](../README.md) for launch commands and deployment instructions.
 
-# SAM
-cd Grounded-Segment-Anything && mkdir checkpoints && cd checkpoints
-wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
-wget https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth
-wget https://huggingface.co/spaces/xinyu1205/Tag2Text/resolve/main/ram_swin_large_14m.pth
-wget https://huggingface.co/xinyu1205/recognize-anything-plus-model/blob/main/ram_plus_swin_large_14m.pth
-wget https://huggingface.co/spaces/xinyu1205/Tag2Text/resolve/main/tag2text_swin_14m.pth
+## Configuration
 
-# Grounded-SAM-2
-cd ../../cd Grounded-SAM-2 && cd checkpoints
-bash download_ckpts.sh
-cd ../ && cd gdino_checkpoints
-bash download_ckpts.sh
+YAML config files for each exectuable are in `configs/`:
 
-# Grounding-DINO
-# for the first time(during installation), run the following command to fix the .cu file
-cd ../../Grounded-Segment-Anything/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/
-sed -i 's/value.type()/value.scalar_type()/g' ms_deform_attn_cuda.cu
-sed -i 's/value.scalar_type().is_cuda()/value.is_cuda()/g' 
-```
+| Config | Used By |
+|---|---|
+| `wildos_nav_conf.yaml` | WildOS navigation |
+| `imgfrontier_nav_conf.yaml` | Image frontier baseline |
+| `lrn_nav_conf.yaml` | LRN baseline |
+| `geofrontier_nav_conf.yaml` | Geometric frontier navigation |
+| `explorfm_triangulator_conf.yaml` | Standalone ExploRFM triangulation |
+| `triangulation3d_objsearch_conf.yaml` | Object search triangulation |
 
-## Usage
-The following must be run in the `third_party` directory of the `img_vlms` package every time you start a new docker container.
-This installs the thrid_party packages in the PYTHONPATH of the docker container, so they can be imported directly without needing to
-use relative imports in the code.
-```bash
-# run everytime you start a new docker container
-cd ../../
-bash install_deps.sh
-```
+## Method Details
 
-To play the bag file with the Spot camera feed, run the following command:
-```bash
-ros2 bag play ../bags/spot1-20250417-153615U/ --remap /spot1/tf:=/tf /spot1/tf_static:=/tf_static
-```
+### WildOS
+WildOS scores frontier nodes of the navigation graph using ExploRFM predictions. The scoring combines traversability (is it safe?), visual frontier confidence (where to explore?), and object similarity (does it match the query?). When `do_object_search` is enabled, the `obj_mask_triangulation` node is automatically launched to estimate coarse goal positions using a particle filter.
 
-To run RADIO, run the following command:
-```bash
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-ros2 run img_vlms img_radio
-```
+### Image Frontier Navigation (Baseline)
+Assumes a single geometric frontier at the center-bottom pixel of each camera image. Projects a path from the bottom-center pixel to the chosen visual frontier using the depth image and sends a goal at `lookahead_dist` along the projected path to the local planner.
 
-To run SAM-2 on the Spot camera feed, run the following command:
-```bash
-ros2 run img_vlms img_sam
-```
-
-To run Grounding-DINO with RAM/RAM++ run:
-```bash
-ros2 run img_vlms img_ramp_gdino
-```
-
-To visualize DINOv2 PCA features, run:
-```bash
-ros2 run img_vlms img_dinov2_pca
-```
+### LRN (Baseline)
+A purely vision-based baseline that does not use geometric information for exploration. It scores angular bins around the robot using visual frontier scores and the goal heading.

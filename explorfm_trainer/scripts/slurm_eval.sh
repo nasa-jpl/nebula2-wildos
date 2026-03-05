@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #SBATCH --cpus-per-task=4
-#SBATCH -A es_hutter
 #SBATCH --time=8:00:00
 #SBATCH --mem-per-cpu=16G
 #SBATCH --gpus=rtx_4090:1
@@ -9,7 +8,6 @@
 
 source ~/.bashrc
 
-module load eth_proxy
 conda activate radio
 cd ..
 python -u src/eval.py evaluation=radio_ovts
