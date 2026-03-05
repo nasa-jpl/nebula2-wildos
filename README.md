@@ -6,6 +6,7 @@
 [Erica Tevere](https://www-robotics.jpl.nasa.gov/who-we-are/people/erica-tevere/)<sup>1</sup>,
 [Deegan Atha](https://www.linkedin.com/in/deeganatha/)<sup>3</sup>,
 [Marcel Kaufmann](http://www.kaufmann.space/)<sup>1</sup>,
+<br>
 [Shehryar Khattak](https://www.linkedin.com/in/shehryar-khattak)<sup>3</sup>,
 [Manthan Patel](https://manthan99.github.io/)<sup>2</sup>,
 [Marco Hutter](https://rsl.ethz.ch/the-lab/people/person-detail.MTIxOTEx.TGlzdC8yNDQxLC0xNDI1MTk1NzM1.html)<sup>2</sup>,
@@ -27,13 +28,11 @@
 
 </div>
 
----
-
 <div align="center">
   <img src="assets/teaser.svg" alt="WildOS Teaser" width="90%"/>
 </div>
 
-## Abstract
+## 📄 Abstract
 
 Autonomous navigation in complex, unstructured outdoor environments requires robots to operate over long ranges without prior maps and limited depth sensing. In such settings, relying solely on geometric frontiers for exploration is often insufficient; the ability to reason semantically about *where to go* and *what is safe to traverse* is crucial for robust, efficient exploration.
 
@@ -41,9 +40,9 @@ This work presents **WildOS**, a unified system for long-range, open-vocabulary 
 
 Furthermore, we introduce a **particle-filter-based method for coarse localization** of the open-vocabulary target query, that estimates candidate goal positions beyond the robot's immediate depth horizon, enabling effective planning toward distant goals. Extensive closed-loop field experiments across diverse off-road and urban terrains demonstrate that WildOS enables robust navigation, significantly outperforming purely geometric and purely vision-based baselines in both efficiency and autonomy.
 
----
+<br>
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 wildos/
@@ -59,11 +58,11 @@ wildos/
 └── ckpts/                 # Model checkpoints
 ```
 
-Each package has its own README with additional details. See the [Component Overview](#component-overview) section below.
+Each package has its own README with additional details. See the [Component Overview](#-component-overview) section below.
 
----
+<br>
 
-## Installation
+## ⚙️ Installation
 
 ### Prerequisites
 
@@ -101,9 +100,9 @@ source install/setup.bash
 
 > **Note**: WildOS was deployed inside a Docker container during field experiments. The dependencies above can be replicated in a virtual environment for development.
 
----
+<br>
 
-## Checkpoints
+## 💾 Checkpoints
 
 Pre-trained head checkpoints are included in `ckpts/`:
 
@@ -128,9 +127,9 @@ Pre-trained head checkpoints are included in `ckpts/`:
 
 > **Path configuration**: All nodes in `visual_navigation` expect the `ckpts/` folder to be at `Path.home() / ckpts`.
 
----
+<br>
 
-## Quick Start: Deployment
+## 🚀 Quick Start: Deployment
 
 ### Launch WildOS (Full Pipeline)
 
@@ -173,9 +172,9 @@ The following packages must be running alongside WildOS:
 - [**Nav2**](https://github.com/ros-navigation/navigation2) — local planning and control
 - **Graph Construction** - code will be released in a future update.
 
----
+<br>
 
-## Component Overview
+## 🧩 Component Overview
 
 | Package | Description | Details |
 |---|---|---|
@@ -189,10 +188,9 @@ The following packages must be running alongside WildOS:
 | [`object_search_msgs/`](object_search_msgs/) | ROS 2 message definitions for object search | — |
 | [`gps_visualization/`](gps_visualization/) | GPS path visualization (ROS 2 C++) | — |
 
+<br>
 
----
-
-## Citation
+## 📝 Citation
 
 If you find this work useful, please cite:
 
@@ -208,9 +206,9 @@ If you find this work useful, please cite:
 }
 ```
 
----
+<br>
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 We thank the authors of the following works for open-sourcing their code:
 
@@ -221,8 +219,8 @@ We thank the authors of the following works for open-sourcing their code:
 
 We also thank the authors of [LRN](https://arxiv.org/abs/2504.13149) for sharing their code, which was helpful in setting up the baseline.
 
----
+<br>
 
-## License
+## 📜 License
 
 This project is released under the [Apache 2.0 License](LICENSE).
