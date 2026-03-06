@@ -10,9 +10,9 @@ from torch import nn
 from torch.nn import functional as F
 import onnxruntime as ort
 
-from protoyping.datasets.rugd import RUGDTraversabilityDataset
-from protoyping.datasets.nebula import NebulaDataset
-from explorfm_model import ModelPrecision
+from prototyping.datasets.rugd import RUGDTraversabilityDataset
+from prototyping.datasets.nebula import NebulaDataset
+from .explorfm_model import ModelPrecision
 
 
 class ExploRFMONNXInference:
