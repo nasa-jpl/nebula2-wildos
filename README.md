@@ -4,21 +4,20 @@
 
 [Hardik Shah](https://hardik01shah.github.io/)<sup>1,2</sup>,
 [Erica Tevere](https://www-robotics.jpl.nasa.gov/who-we-are/people/erica-tevere/)<sup>1</sup>,
-[Deegan Atha](https://www.linkedin.com/in/deeganatha/)<sup>3</sup>,
+[Deegan Atha](https://www.linkedin.com/in/deeganatha/)<sup>1</sup>,
 [Marcel Kaufmann](http://www.kaufmann.space/)<sup>1</sup>,
 <br>
-[Shehryar Khattak](https://www.linkedin.com/in/shehryar-khattak)<sup>3</sup>,
+[Shehryar Khattak](https://www.linkedin.com/in/shehryar-khattak)<sup>1</sup>,
 [Manthan Patel](https://manthan99.github.io/)<sup>2</sup>,
 [Marco Hutter](https://rsl.ethz.ch/the-lab/people/person-detail.MTIxOTEx.TGlzdC8yNDQxLC0xNDI1MTk1NzM1.html)<sup>2</sup>,
-[Jonas Frey](https://jonasfrey96.github.io/)<sup>2,4,5</sup>,
+[Jonas Frey](https://jonasfrey96.github.io/)<sup>2,3,4</sup>,
 [Patrick Spieler](https://www-robotics.jpl.nasa.gov/who-we-are/people/patrick-spieler/)<sup>1</sup>
 
 <sup>1</sup>Jet Propulsion Laboratory (JPL), NASA &nbsp;&nbsp;
 <sup>2</sup>Robotics Systems Lab, ETH Zurich &nbsp;&nbsp;
-<sup>3</sup>Field AI (Work done while at JPL)
 
-<sup>4</sup>Stanford University &nbsp;&nbsp;
-<sup>5</sup>University of California, Berkeley
+<sup>3</sup>Stanford University &nbsp;&nbsp;
+<sup>4</sup>University of California, Berkeley
 
 [![arXiv](https://img.shields.io/badge/arXiv-2602.19308-b31b1b.svg)](https://arxiv.org/abs/2602.19308)
 [![Project Page](https://img.shields.io/badge/Project-Page-blue)](https://leggedrobotics.github.io/wildos/)
