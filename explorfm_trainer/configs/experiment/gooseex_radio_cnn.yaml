@@ -1,0 +1,66 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: gooseex
+  - override /model: binary_seg
+  - override /trainer: gpu
+  - override /logger: wandb
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["RADIO", "c-radio_v3-b"]
+
+seed: 42
+
+model:
+  strict_loading: false
+  net:
+    _target_: src.models.components.radio_cnn.RADIO_CNN
+    model_version: "c-radio_v3-b"
+    adaptor_version: null
+    use_naclip: true
+
+  optimizer:
+    lr: 0.0001
+
+  scheduler:
+    patience: 5
+
+logger:
+  wandb:
+    tags: ${tags}
+    project: "TraversabilitySegmentation"
+    entity: "objsearch-jpl"
+    name: gooseex_radio_cnn_naclip_lr1e-4_rsz1024
+
+paths:
+  root_dir: /cluster/home/$USER/scratch/explorfm_trainer
+  data_dir: /cluster/home/$USER/scratch/data
+
+trainer:
+  max_epochs: 100
+
+callbacks:
+  model_checkpoint:
+    _target_: src.models.components.model_ckpt_without_backbone.ModelCheckpointWithoutBackbone
+    monitor: val/loss
+    mode: min
+    backbone_name: radio_model
+  
+  lr_monitor:
+    _target_: lightning.pytorch.callbacks.LearningRateMonitor
+    logging_interval: epoch
+
+data:
+  batch_size: 32
+  num_workers: 4
+  pin_memory: True
+  resize_size:
+    - 1024
+    - 1024
+  crop: true
+

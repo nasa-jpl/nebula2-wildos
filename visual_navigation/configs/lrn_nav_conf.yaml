@@ -1,0 +1,80 @@
+# Model Params
+frontier_ckpt: "frontier_head.ckpt"
+traversability_ckpt: "trav_head.ckpt"
+model_version: "c-radio_v3-b"
+adaptor_version: null
+use_naclip: true
+use_summary_for_spatial: true
+radio_dim: 768
+static_scale_factor: 0.75
+model_precision: "FP16"
+
+# Nav Params
+num_cameras: 3
+cams_inverted: true
+
+# LRN Params
+hotspot_threshold: 0.7
+frontier_opening_kernel_size: 20
+angle_discretization_deg: 5
+fixed_hotspot_dist: 5.0
+confidence_threshold: 0.0
+goal_lock_range: 6.0
+honing_range: 30
+costmap_range: 8.0
+ema_alpha: 0.1
+beta_degradation: 1.0
+
+# Cost parms
+goal_std: 90.0
+prev_std: 110.0
+
+# ROS2 frames and topics
+parent_frame: "spot1/odom"
+body_frame: "spot1/base_link"
+cam_frame: "spot1/realsense/{}_color_optical_frame"
+camera_img_topic: "/spot1/realsense/{}/color/image_raw/compressed"
+camera_info_topic: "/spot1/realsense/{}/color/camera_info"
+odometry_topic: "/spot1/odom"
+
+# Publish topic names
+model_viz_topic: "/spot1/model_visualization"
+score_viz_topic: "/spot1/lrn_scores_debug"
+heatring_viz_topic: "/spot1/lrn_heatring"
+nav2_goal_topic: "/spot1/goal_pose"
+
+# ROS2 subscriber params
+qos_history_depth: 1
+syncsub_queue_size: 1
+syncsub_slop: 0.2
+
+# Object Search Config
+object_search_config:
+    text_queries: 
+        - "orange flag"
+    pixel_level_seg: true
+    mask_threshold: 0.09
+    obj_frontier_score: 0.9
+    obj_trav_score: 0.9
+
+# Goal Navigator Config
+goal_navigator_config:
+  goal_reach_radius: 2.0
+  reach_in_2D: true
+  waypoints: null
+  overwrite_waypoints: true
+  waypoint_frame: "spot1/odom"
+  waypoint_topic: "spot1/imgnav_waypoint"
+  waypoint_viz_topic: "spot1/goal_waypoints"
+  goal_dir_viz_topic: "spot1/goal_direction"
+
+# TFLookup Config
+tf_lookup_config:
+  buffer_size: 1
+  cache_time: 10
+  timer_duration: 0.5
+  lookup_timeout: 0
+  qos_history_depth: 1
+  wait_for_oldest: true
+  clear_buffer_on_process: true
+  spin_thread: false

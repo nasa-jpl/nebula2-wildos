@@ -1,0 +1,20 @@
+# --------- core --------- #
+torch==2.7.0
+torchaudio==2.7.0
+torchvision==0.22.0
+
+# --------- vision --------- #
+timm==1.0.15
+open-clip-torch==2.32.0
+transformers==4.51.3
+einops==0.8.1
+fairscale==0.4.4
+scikit-image
+
+# --------- config --------- #
+ruamel.yaml==0.18.11
+omegaconf
+
+# --------- gps utils --------- #
+folium
+selenium

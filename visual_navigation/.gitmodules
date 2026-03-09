@@ -1,9 +1,0 @@
-[submodule "img_vlms/third_party/nvidia_radio"]
-	path = img_vlms/img_vlms/third_party/nvidia_radio
-	url = https://hydra.robotics.caltech.edu/nebula2/perception/nvidia_radio.git
-[submodule "img_vlms/third_party/Grounded-SAM-2"]
-	path = img_vlms/img_vlms/third_party/Grounded-SAM-2
-	url = https://github.com/IDEA-Research/Grounded-SAM-2.git
-[submodule "img_vlms/third_party/Grounded-Segment-Anything"]
-	path = img_vlms/img_vlms/third_party/Grounded-Segment-Anything
-	url = https://github.com/IDEA-Research/Grounded-Segment-Anything.git

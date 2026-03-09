@@ -1,0 +1,11 @@
+_target_: src.data.grandtour_frontiers_datamodule.GrandTourFrontiersDataModule
+data_dir: ${paths.data_dir}/grand_tour_selected
+gt_type: SAM_BOUNDARY  # or BBOX
+boundary_dilation: 10
+labels: null
+dataset_size: null
+boundary_frontier_thickness: 50
+train_val_split: [0.8, 0.2]
+batch_size: 16
+num_workers: 0
+pin_memory: False

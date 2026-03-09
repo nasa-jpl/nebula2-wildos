@@ -1,5 +1,0 @@
-_target_: src.data.rugd_traversability_datamodule.RUGDTraversabilityDataModule
-data_dir: ${paths.data_dir}/RUGD
-batch_size: 16
-num_workers: 0
-pin_memory: False

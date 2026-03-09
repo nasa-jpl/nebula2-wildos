@@ -1,0 +1,63 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: gtour
+  - override /model: binary_seg
+  - override /trainer: gpu
+  - override /logger: wandb
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["RADIO", "c-radio_v3-b"]
+
+seed: 42
+
+model:
+  _target_: src.models.frontier_segmentation_module.FrontierSegmentationLitModule
+  strict_loading: false
+  net:
+    _target_: src.models.components.radio_cnn.RADIO_CNN
+    model_version: "c-radio_v3-b"
+    adaptor_version: null
+    use_naclip: true
+
+  optimizer:
+    lr: 0.0001
+
+  scheduler:
+    patience: 3
+
+logger:
+  wandb:
+    tags: ${tags}
+    project: "FrontierDetection"
+    entity: "objsearch-jpl"
+    name: train_gtour_radio_cnn_naclip-SAM_BOUNDARY-frontierOnly
+
+paths:
+  root_dir: /cluster/home/$USER/scratch/explorfm_trainer
+  data_dir: /cluster/home/$USER/scratch/data
+
+trainer:
+  max_epochs: 100
+
+callbacks:
+  model_checkpoint:
+    _target_: src.models.components.model_ckpt_without_backbone.ModelCheckpointWithoutBackbone
+    monitor: val/loss
+    mode: min
+    backbone_name: radio_model
+  
+  lr_monitor:
+    _target_: lightning.pytorch.callbacks.LearningRateMonitor
+    logging_interval: epoch
+
+data:
+  batch_size: 8
+  num_workers: 4
+  pin_memory: True
+  labels: ['frontier']

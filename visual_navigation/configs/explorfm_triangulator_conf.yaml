@@ -1,0 +1,59 @@
+# Model Params
+model_version: "c-radio_v3-b"
+adaptor_version: "siglip2"
+use_naclip: true
+use_summary_for_spatial: true
+radio_dim: 768
+static_scale_factor: 0.75
+model_precision: "FP16"
+
+# Nav Params
+num_cameras: 3
+
+# ROS2 frames and topics
+parent_frame: "{robot_name}/odom"
+cam_frame: "{robot_name}/realsense/{cam_name}_color_optical_frame"
+lidar_frame: "{robot_name}/ouster/front/os_lidar"
+camera_img_topic: "realsense/{cam_name}/color/image_raw/compressed"
+camera_info_topic: "realsense/{cam_name}/color/camera_info"
+lidar_topic: "ouster/front/points_filtered"
+odometry_topic: "odom"
+
+# Publish topic names
+model_viz_topic: "~/query_visualization"
+triangulated_object_topic: "~/triangulated_objects"
+particle_viz_topic: "~/query_hypotheses"
+
+# ROS2 subscriber params
+qos_history_depth: 1
+syncsub_queue_size: 2
+syncsub_slop: 0.2
+
+# Object Search Config
+object_search_config:
+    text_queries: 
+        - "car"
+        - "tree"
+    pixel_level_seg: false
+    mask_threshold: 0.095
+
+# Triangulation config
+max_views: 350
+min_lidar_points: 150
+min_view_distance: 1.0
+particle_generator_config:
+  num_particles: 1000
+  depth_range: [1.0, 100.0]
+  add_odom_drift: false
+use_mask_for_projection: true
+
+# TFLookup Config
+tf_lookup_config:
+    buffer_size: 1
+    cache_time: 10
+    timer_duration: 0.1
+    lookup_timeout: 0
+    qos_history_depth: 1
+    wait_for_oldest: true
+    clear_buffer_on_process: true
+    spin_thread: false

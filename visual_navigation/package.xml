@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>visual_navigation</name>
+  <version>0.0.0</version>
+  <description>Long-range visual navigation and object search.</description>
+  <maintainer email="hardikns@jpl.nasa.gov">Hardik Shah</maintainer>
+  <license>Apache-2.0</license>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <exec_depend>grid_map_msgs</exec_depend>
+  <exec_depend>grid_map_ros</exec_depend>
+  <exec_depend>triangulation3d</exec_depend>
+  <exec_depend>gps_visualization</exec_depend>
+  <exec_depend>object_search_msgs</exec_depend>
+  <exec_depend>graphnav_msgs</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

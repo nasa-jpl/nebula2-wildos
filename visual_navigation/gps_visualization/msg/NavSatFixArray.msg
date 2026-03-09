@@ -1,1 +1,0 @@
-sensor_msgs/NavSatFix[] gps_fixes

@@ -1,3 +1,0 @@
-[submodule "src/models/third_party/nvidia_radio"]
-	path = src/models/third_party/nvidia_radio
-	url = git@hydra.robotics.caltech.edu:nebula2/nvidia_radio.git

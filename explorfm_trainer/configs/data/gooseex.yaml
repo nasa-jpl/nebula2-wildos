@@ -1,0 +1,5 @@
+_target_: src.data.goose-ex_traversability_datamodule.GooseExTraversabilityDataModule
+data_dir: ${paths.data_dir}/GooseEx
+batch_size: 16
+num_workers: 0
+pin_memory: False
