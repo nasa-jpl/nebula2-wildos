@@ -24,7 +24,7 @@ The [`radio_model()`](hubconf.py) function in `hubconf.py` is the main entry poi
 |---|---|---|---|
 | `version` | `str` | `""` | Model identifier (e.g., `"c-radio_v3-b"`) or a **local file path** to a checkpoint (e.g., `"ckpts/c-radio_v3-b_half.pth.tar"`) to skip downloading |
 | `adaptor_names` | `str \| List[str]` | `None` | Adaptor(s) to load (e.g., `"siglip2"` for language-aligned features) |
-| `adaptor_ckpt_path` | `str` | `"~/.cache/huggingface/hub"` | Path to the directory containing SigLIP2 adaptor weights |
+| `adaptor_ckpt_path` | `str` | `"/home/$USER/cache/huggingface/hub"` | Path to the directory containing SigLIP2 adaptor weights |
 | `use_naclip` | `bool` | `False` | Enable NACLIP attention (KK<sup>T</sup>) in the final self-attention layer |
 | `use_summary_for_spatial` | `bool` | `False` | Project spatial patch features through the SigLIP summary adaptor into language-aligned space |
 | `naclip_strategy` | `str` | `"naclip"` | NACLIP variant to use (e.g., `"kkonly"`) |

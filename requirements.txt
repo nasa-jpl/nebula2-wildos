@@ -10,6 +10,9 @@ transformers==4.51.3
 einops==0.8.1
 fairscale==0.4.4
 scikit-image
+onnx
+opencv-python
+matplotlib
 
 # --------- config --------- #
 ruamel.yaml==0.18.11

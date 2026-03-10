@@ -67,29 +67,41 @@ Each package has its own README with additional details. See the [Component Over
 
 - **ROS 2 Jazzy** (tested)
 - **Python >= 3.10**
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)** — Python package manager
 - **CUDA-capable GPU** (ExploRFM trained on *NVIDIA GeForce RTX 4090*, deployed on *NVIDIA Jetson AGX Orin* GPU)
+
+Install uv:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
 ### 1. Create a Virtual Environment
 
 ```bash
-python3 -m venv wildos_venv
+uv venv wildos_venv
 source wildos_venv/bin/activate
 ```
 
 ### 2. Install Python Dependencies
 
 ```bash
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 ### 3. Install Local Packages
 
 ```bash
-pip install -e ./nvidia_radio
-pip install -e ./explorfm
+uv pip install -e ./nvidia_radio
+uv pip install -e ./explorfm
 ```
 
-### 4. Build ROS 2 Packages
+### 4. Install HuggingFace CLI (for downloading checkpoints)
+
+```bash
+uv tool install huggingface_hub[cli]
+```
+
+### 5. Build ROS 2 Packages
 
 ```bash
 # From your colcon workspace (with this repo cloned/symlinked into src/)
@@ -120,11 +132,27 @@ Pre-trained head checkpoints are included in `ckpts/`:
 
 2. **SigLIP2 adaptor** — download to `ckpts/siglip2/`:
    ```bash
-   mkdir -p ckpts/siglip2
-   # Download all files from: https://huggingface.co/google/siglip2-so400m-patch16-naflex/tree/main
+   huggingface-cli download google/siglip2-so400m-patch16-naflex --cache-dir ckpts/siglip2
    ```
 
 > **Path configuration**: All nodes in `visual_navigation` expect the `ckpts/` folder to be at `Path.home() / ckpts`.
+
+### Verify Installation
+
+```bash
+python explorfm/explorfm_model.py
+```
+
+Expected output:
+```
+[INFO] Loading SigLIP2 model and processor for version: google/siglip2-so400m-patch16-naflex
+[INFO] Using checkpoint path: ckpts/siglip2
+Loaded traversability head from ckpts/trav_head.ckpt
+Loaded frontier head from ckpts/frontier_head.ckpt
+Traversability shape: torch.Size([1, 1, 720, 1280])
+Frontiers shape: torch.Size([1, 1, 720, 1280])
+Adaptor features shape: torch.Size([1, 1152, 22, 40])
+```
 
 <br>
 

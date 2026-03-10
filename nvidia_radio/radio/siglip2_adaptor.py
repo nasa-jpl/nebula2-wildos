@@ -36,6 +36,8 @@ class SigLIP2Adaptor(GenericAdaptor):
 
         from transformers import AutoModel, AutoProcessor
         with rank_gate():
+            print(f"[INFO] Loading SigLIP2 model and processor for version: {version}")
+            print(f"[INFO] Using checkpoint path: {ckpt_path}")
             model = AutoModel.from_pretrained(version, trust_remote_code=True, cache_dir=Path(ckpt_path))
             proc = AutoProcessor.from_pretrained(version, trust_remote_code=True, cache_dir=Path(ckpt_path))
 
@@ -94,5 +96,7 @@ def canonicalize_text(
 
 
 @adaptor_registry.register_adaptor("siglip2")
-def create_siglip2_adaptor(main_config: Namespace, adaptor_config: dict_t, state: state_t, ckpt_path: str="~/.cache/huggingface/hub"):
+def create_siglip2_adaptor(main_config: Namespace, adaptor_config: dict_t, state: state_t, ckpt_path: str=None):
+    if ckpt_path is None:
+        ckpt_path = str(home_dir / ".cache" / "huggingface" / "hub")
     return SigLIP2Adaptor(main_config, adaptor_config, state, ckpt_path)

@@ -37,7 +37,7 @@ def radio_model(
     adaptor_names: Union[str, List[str]] = None,
     vitdet_window_size: Optional[int] = None,
     return_checkpoint: bool = False,
-    adaptor_ckpt_path: str = '~/.cache/huggingface/hub',
+    adaptor_ckpt_path: str = None,
     **kwargs,
 ) -> RADIOModel:
     if not version:
